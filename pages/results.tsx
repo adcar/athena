@@ -2,10 +2,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
-interface IProps {}
-
-export default function Results(props: IProps) {
+export default function Results() {
   const router = useRouter();
   const { q } = router.query;
   const EXCHANGE_RATES = gql`
@@ -19,7 +18,9 @@ export default function Results(props: IProps) {
 `;
   const { loading, error, data } = useQuery(EXCHANGE_RATES);
 
-  if (loading) return <p>Loading...</p>;
+  console.log(data);
+
+  if (loading) return <ClimbingBoxLoader />;
   if (error) return <p>Error :(</p>;
 
   return <h1>query: {q}</h1>;

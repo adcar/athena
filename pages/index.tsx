@@ -9,7 +9,7 @@ import { InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const transition = "all 0.75s ease-in-out";
+//const transition = "all 0.75s ease-in-out";
 const RADIUS = 30;
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,7 +61,6 @@ const services = ["Apache", "Lighttpd", "Nginx", "OpenSSH"];
 export default function Index() {
   const router = useRouter();
   const textRef = useRef(null);
-  const height = 100;
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
   const [focus, setFocus] = useState(false);
@@ -100,6 +99,9 @@ export default function Index() {
               ? `translateY(-${textRef.current.getBoundingClientRect().y}px)`
               : "none"
           }}
+          onInputChange={(e, value) => {
+            setTerm(value);
+          }}
           onOpen={() => setFocus(true)}
           onClose={() => setFocus(false)}
           options={services}
@@ -113,9 +115,6 @@ export default function Index() {
               className={classes.search}
               InputProps={{
                 ...params.InputProps,
-                onChange: e => {
-                  setTerm(e.target.value);
-                },
                 className: classes.inputClass,
                 fullWidth: true,
                 endAdornment: (
