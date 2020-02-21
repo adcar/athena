@@ -10,8 +10,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3)
   },
   highlight: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.getContrastText(theme.palette.secondary.main)
+    backgroundColor: theme.palette.secondary.light
   }
 }));
 
@@ -29,7 +28,7 @@ export default function Host({ ip, banner, port, term, ...extra }: IProps) {
     <Paper className={classes.root} {...extra}>
       <Grid container spacing={4}>
         <Grid item md={2} xs={12}>
-          <Typography>{ip}</Typography>
+          <Typography color="secondary">{ip}</Typography>
         </Grid>
         <Grid item md={8} xs={12} style={{ overflowX: "auto" }}>
           <Typography

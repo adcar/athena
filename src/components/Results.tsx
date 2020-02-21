@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -10,7 +10,8 @@ import blankCanvasSvg from "../../public/blank_canvas.svg";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Host from "./Host";
-
+import InfiniteScroll from "react-infinite-scroll-component";
+import { BounceLoader } from "react-spinners";
 const useStyles = makeStyles(theme => ({
   wrapper: {
     height: "90%",
@@ -18,6 +19,13 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
+  },
+  loadingWrapper: {
+    width: "100%",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    display: "flex",
+    justifyContent: "center"
   },
   img: {
     width: "100%",
@@ -30,17 +38,27 @@ export default function Results() {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
+  const [hasMore, setHasMore] = useState(true);
   const { q } = router.query;
-  const EXCHANGE_RATES = gql`
-{
-  internet(where:{banner: {_ilike: "%${q}%"}}, limit:30) {
-    ip
-    banner
-    port
-  }
-}
-`;
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+  const GET_RESULTS = gql`
+    query getResults($offset: Int, $limit: Int) {
+      internet(
+        where: { banner: { _ilike: "%${q}%" } }
+        limit: $limit
+        offset: $offset
+      ) {
+        ip
+        banner
+        port
+      }
+    }
+  `;
+  const { loading, error, data, fetchMore } = useQuery(GET_RESULTS, {
+    variables: {
+      offset: 0,
+      limit: 10
+    }
+  });
 
   if (loading)
     return (
@@ -82,17 +100,43 @@ export default function Results() {
 
   return (
     <Container>
-      {data.internet.map((result, index) => (
-        <Host
-          {...result}
-          term={q}
-          key={index}
-          style={{
-            marginTop: 20,
-            marginBottom: 20
-          }}
-        />
-      ))}
+      <InfiniteScroll
+        dataLength={data.internet.length}
+        next={() =>
+          fetchMore({
+            variables: {
+              offset: data.internet.length
+            },
+            updateQuery: (prev: any, { fetchMoreResult }) => {
+              if (!fetchMoreResult) {
+                setHasMore(false);
+                return prev;
+              }
+              return Object.assign({}, prev, {
+                internet: [...prev.internet, ...fetchMoreResult.internet]
+              });
+            }
+          })
+        }
+        hasMore={hasMore}
+        loader={
+          <div className={classes.loadingWrapper}>
+            <BounceLoader color={theme.palette.secondary.main} />
+          </div>
+        }
+      >
+        {data.internet.map((result, index) => (
+          <Host
+            {...result}
+            term={q}
+            key={index}
+            style={{
+              marginTop: 20,
+              marginBottom: 20
+            }}
+          />
+        ))}
+      </InfiniteScroll>
     </Container>
   );
 }
