@@ -4,6 +4,7 @@ import Results from "../src/components/Results";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../public/athena-logo.svg";
 import Link from "next/link";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,12 +32,12 @@ export default function results() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div className={classes.nav}>
+      <Container className={classes.nav}>
         <Link href="/">
           <img src={logo} alt="Athena Logo" className={classes.logo} />
         </Link>
         <Search className={classes.search} />
-      </div>
+      </Container>
 
       <Results />
     </div>

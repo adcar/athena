@@ -8,6 +8,8 @@ import { useTheme } from "@material-ui/core";
 import bugSvg from "../../public/bug.svg";
 import blankCanvasSvg from "../../public/blank_canvas.svg";
 import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Host from "./Host";
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -78,7 +80,19 @@ export default function Results() {
     }
   }
 
-  console.log(data);
-
-  return <h1>Now this is a bruh moment</h1>;
+  return (
+    <Container>
+      {data.internet.map((result, index) => (
+        <Host
+          {...result}
+          term={q}
+          key={index}
+          style={{
+            marginTop: 20,
+            marginBottom: 20
+          }}
+        />
+      ))}
+    </Container>
+  );
 }

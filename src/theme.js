@@ -14,6 +14,9 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: ["Montserrat", "sans-serif"],
     fontWeightLight: 800
+  },
+  shape: {
+    borderRadius: 30
   }
 });
 

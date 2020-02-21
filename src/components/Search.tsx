@@ -4,11 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import { InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useRouter } from "next/router";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 const services = ["Apache", "Lighttpd", "Nginx", "OpenSSH"];
 
-const RADIUS = 30;
 const useStyles = makeStyles(theme => ({
   form: {
     width: "100%"
@@ -35,8 +34,10 @@ const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.getContrastText(theme.palette.primary.main),
-    borderBottomLeftRadius: RADIUS,
-    borderBottomRightRadius: RADIUS,
+    borderBottomLeftRadius: theme.shape.borderRadius,
+    borderBottomRightRadius: theme.shape.borderRadius,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
     padding: theme.spacing(1),
 
     marginTop: theme.spacing(-1)
@@ -49,6 +50,7 @@ interface IProps {
 
 export default function Search(props: IProps) {
   const classes = useStyles();
+  const theme = useTheme();
   const router = useRouter();
   const textRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -102,10 +104,10 @@ export default function Search(props: IProps) {
                 ),
                 style: {
                   height: 56,
-                  borderTopRightRadius: RADIUS,
-                  borderTopLeftRadius: RADIUS,
-                  borderBottomRightRadius: focus ? 0 : RADIUS,
-                  borderBottomLeftRadius: focus ? 0 : RADIUS
+                  borderTopRightRadius: theme.shape.borderRadius,
+                  borderTopLeftRadius: theme.shape.borderRadius,
+                  borderBottomRightRadius: focus ? 0 : theme.shape.borderRadius,
+                  borderBottomLeftRadius: focus ? 0 : theme.shape.borderRadius
                 },
                 classes: {
                   root: classes.input
