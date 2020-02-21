@@ -65,7 +65,7 @@ export default function Results() {
       return (
         <div className={classes.wrapper}>
           <Typography variant="h2" component="h1" color="primary">
-            An unknown error occured
+            An unknown error occurred
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
             We're not sure what happened.
