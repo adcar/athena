@@ -11,15 +11,13 @@ const services = ["Apache", "Lighttpd", "Nginx", "OpenSSH"];
 const RADIUS = 30;
 const useStyles = makeStyles(theme => ({
   form: {
-    width: 500,
-    maxWidth: "100%"
+    width: "100%"
   },
   searchIcon: {
     cursor: "pointer"
   },
   search: {
-    width: 500,
-    maxWidth: "100%"
+    width: "100%"
   },
   input: {
     padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
@@ -56,11 +54,11 @@ export default function Search(props: IProps) {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
   const [focus, setFocus] = useState(false);
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e) {
     e.preventDefault();
     // setOpen(true);
     // textRef.current.blur();
-    router.push(`/results?q=${term}`);
+    if (term !== "") router.push(`/results?q=${term}`);
   }
   return (
     <div {...props}>
@@ -87,16 +85,18 @@ export default function Search(props: IProps) {
           renderInput={params => (
             <TextField
               {...params}
+              fullWidth
               variant="filled"
               label="Search for services"
               color="secondary"
               className={classes.search}
               InputProps={{
                 ...params.InputProps,
+                required: true,
                 className: classes.inputClass,
                 fullWidth: true,
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment position="end" onClick={handleSubmit}>
                     <SearchIcon className={classes.searchIcon} />
                   </InputAdornment>
                 ),

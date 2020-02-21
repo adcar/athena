@@ -9,17 +9,19 @@ import bugSvg from "../../public/bug.svg";
 import blankCanvasSvg from "../../public/blank_canvas.svg";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   wrapper: {
-    height: "100%",
+    height: "90%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
   },
   img: {
-    width: 500,
-    maxWidth: "100%"
+    width: "100%",
+    maxWidth: "100%",
+    maxHeight: "50vh",
+    marginTop: theme.spacing(4)
   }
 }));
 export default function Results() {
@@ -51,7 +53,7 @@ export default function Results() {
           <Typography variant="h2" component="h1" color="primary">
             No Results Found
           </Typography>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="subtitle1">
             Try picking one of the suggested search queries
           </Typography>
           <img
@@ -67,7 +69,7 @@ export default function Results() {
           <Typography variant="h2" component="h1" color="primary">
             An unknown error occurred
           </Typography>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="subtitle1">
             We're not sure what happened.
           </Typography>
           <img src={bugSvg} className={classes.img} alt="Bug" />
