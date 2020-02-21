@@ -39,9 +39,9 @@ const useStyles = makeStyles(theme => ({
     borderBottomRightRadius: theme.shape.borderRadius,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    padding: theme.spacing(1),
 
-    marginTop: theme.spacing(-1)
+    marginTop: theme.spacing(-1),
+    width: "100%"
   }
 }));
 
@@ -54,7 +54,6 @@ export default function Search(props: IProps) {
   const theme = useTheme();
   const router = useRouter();
   const textRef = useRef(null);
-  const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
   const [focus, setFocus] = useState(false);
   function handleSubmit(e) {
@@ -74,11 +73,6 @@ export default function Search(props: IProps) {
             noOptions: classes.autoCompleteList,
             option: classes.autoCompleteList,
             paper: classes.paper
-          }}
-          style={{
-            transform: open
-              ? `translateY(-${textRef.current.getBoundingClientRect().y}px)`
-              : "none"
           }}
           onInputChange={(e, value) => {
             setTerm(value);
@@ -130,11 +124,13 @@ export default function Search(props: IProps) {
   );
 }
 
-function MyPopper({ children, open, ...extra }) {
+function MyPopper({ children, open, anchorEl, ...extra }) {
   return (
     <Popper
+      disablePortal
       placement={"bottom"}
       open={open}
+      anchorEl={anchorEl}
       {...extra}
       modifiers={{
         flip: {
