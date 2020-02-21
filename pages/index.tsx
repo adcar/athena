@@ -8,14 +8,15 @@ import Search from "../src/components/Search";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingTop: theme.spacing(4),
+    paddingTop: "10vh",
     display: "flex",
     alignItems: "center",
     minHeight: "100vh",
     flexDirection: "column"
   },
   logo: {
-    width: 300
+    width: 300,
+    maxHeight: "40vh"
   },
   search: {
     marginTop: theme.spacing(4),
