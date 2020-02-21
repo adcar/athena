@@ -1,10 +1,11 @@
-import React, { FormEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import { InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useRouter } from "next/router";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Popper from "@material-ui/core/Popper";
 
 const services = ["Apache", "Lighttpd", "Nginx", "OpenSSH"];
 
@@ -66,6 +67,7 @@ export default function Search(props: IProps) {
     <div {...props}>
       <form onSubmit={handleSubmit} className={classes.form}>
         <Autocomplete
+          PopperComponent={MyPopper}
           ref={textRef}
           classes={{
             listbox: classes.autoCompleteList,
@@ -84,6 +86,7 @@ export default function Search(props: IProps) {
           onOpen={() => setFocus(true)}
           onClose={() => setFocus(false)}
           options={services}
+          disableListWrap
           renderInput={params => (
             <TextField
               {...params}
@@ -124,5 +127,22 @@ export default function Search(props: IProps) {
         />
       </form>
     </div>
+  );
+}
+
+function MyPopper({ children, open, ...extra }) {
+  return (
+    <Popper
+      placement={"bottom"}
+      open={open}
+      {...extra}
+      modifiers={{
+        flip: {
+          enabled: false
+        }
+      }}
+    >
+      {children}
+    </Popper>
   );
 }
