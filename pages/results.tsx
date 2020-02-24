@@ -9,7 +9,7 @@ import Container from "@material-ui/core/Container";
 const useStyles = makeStyles(theme => ({
   root: {
     height: "95vh",
-    padding: theme.spacing(4)
+    padding: theme.spacing(1)
   },
   nav: {
     display: "flex",
