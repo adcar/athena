@@ -9,6 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.43",
     "apollo-boost": "^0.4.7",
     "clsx": "latest",
+    "country-list": "^2.2.0",
     "framer-motion": "^1.8.4",
     "graphql": "^14.6.0",
     "isomorphic-fetch": "^2.2.1",
