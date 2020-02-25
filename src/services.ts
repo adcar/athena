@@ -6,7 +6,8 @@ const services = [
   "Ubuntu",
   "Debian",
   "CentOS",
-  "Wordpress"
+  "Wordpress",
+  "404 Not Found"
 ];
 
 export default services;
