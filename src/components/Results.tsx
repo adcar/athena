@@ -9,7 +9,7 @@ import bugSvg from "../../public/bug.svg";
 import blankCanvasSvg from "../../public/blank_canvas.svg";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Host from "./Host";
+import HostCard from "./HostCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { BounceLoader } from "react-spinners";
 const useStyles = makeStyles(theme => ({
@@ -126,15 +126,7 @@ export default function Results() {
         }
       >
         {data.internet.map((result, index) => (
-          <Host
-            {...result}
-            term={q}
-            key={index}
-            style={{
-              marginTop: 20,
-              marginBottom: 20
-            }}
-          />
+          <HostCard {...result} term={q} key={index} />
         ))}
       </InfiniteScroll>
     </Container>
