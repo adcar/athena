@@ -35,7 +35,7 @@ export default function HostCard({ ip, banner, port, term, ...extra }: IProps) {
     <Paper
       className={classes.root}
       {...extra}
-      onClick={() => router.push(`/host/${ip}`)}
+      onClick={() => router.push(`/host/${ip}?q=${term}`)}
     >
       <Grid container spacing={4}>
         <Grid item md={2} xs={12}>
