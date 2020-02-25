@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 
-const services = ["Apache", "Lighttpd", "Nginx", "OpenSSH"];
+import services from "../services";
 
 const useStyles = makeStyles(theme => ({
   form: {
