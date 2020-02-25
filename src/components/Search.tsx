@@ -49,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 interface IProps {
   className?: string;
+  defaultTerm?: string;
 }
 
 export default function Search(props: IProps) {
@@ -59,6 +60,7 @@ export default function Search(props: IProps) {
   const [term, setTerm] = useState("");
   const [focus, setFocus] = useState(false);
   const isMedium = useMediaQuery(theme.breakpoints.up("md"));
+  const { q } = router.query;
   function handleSubmit(e) {
     e.preventDefault();
     // setOpen(true);
@@ -84,6 +86,7 @@ export default function Search(props: IProps) {
           onClose={() => setFocus(false)}
           options={services}
           disableListWrap
+          defaultValue={q}
           renderInput={params => (
             <TextField
               {...params}
