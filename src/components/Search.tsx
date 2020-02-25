@@ -8,6 +8,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 
 import services from "../services";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -57,6 +58,7 @@ export default function Search(props: IProps) {
   const textRef = useRef(null);
   const [term, setTerm] = useState("");
   const [focus, setFocus] = useState(false);
+  const isMedium = useMediaQuery(theme.breakpoints.up("md"));
   function handleSubmit(e) {
     e.preventDefault();
     // setOpen(true);
@@ -87,7 +89,11 @@ export default function Search(props: IProps) {
               {...params}
               fullWidth
               variant="filled"
-              label="Search for services"
+              label={
+                isMedium
+                  ? "Search for web services, HTTP codes, and more!"
+                  : "Search for services"
+              }
               color="secondary"
               className={classes.search}
               InputProps={{
