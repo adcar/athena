@@ -2,6 +2,8 @@ const services = [
   "Apache",
   "Nginx",
   "LigHTTPd",
+  "IIS",
+  "PHP",
   "OpenSSH",
   "Ubuntu",
   "Debian",
