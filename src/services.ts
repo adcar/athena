@@ -6,9 +6,7 @@ const services = [
   "Ubuntu",
   "Debian",
   "CentOS",
-  "Wordpress",
-  "Joomla",
-  "Drupal"
+  "Wordpress"
 ];
 
 export default services;

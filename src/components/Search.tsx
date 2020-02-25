@@ -41,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     borderTopRightRadius: 0,
 
     marginTop: theme.spacing(-1),
-    width: "100%"
+    width: 500,
+    maxWidth: "100%"
   }
 }));
 
