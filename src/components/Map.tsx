@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-import ReactMapGL, {
-  Marker,
-  NavigationControl,
-  FullscreenControl
-} from "react-map-gl";
+import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 import PlaceIcon from "@material-ui/icons/PlaceSharp";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   navControl: {
     position: "absolute",
     left: 20,
@@ -53,7 +49,6 @@ export default function Map({ latitude, longitude, ...extra }: IProps) {
         <PlaceIcon color="secondary" fontSize="large" />
       </Marker>
       <NavigationControl className={classes.navControl} />
-      {/*<FullscreenControl className={classes.screenControl} />*/}
     </ReactMapGL>
   );
 }

@@ -7,8 +7,6 @@ import theme from "../src/theme";
 import client from "../src/client";
 import { ApolloProvider } from "@apollo/react-hooks";
 
-
-
 export default class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
@@ -32,7 +30,6 @@ export default class MyApp extends App {
         </Head>
         <ApolloProvider client={client}>
           <ThemeProvider theme={theme}>
-            {/* CssBaseline kick-start an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <Component {...pageProps} />
           </ThemeProvider>
