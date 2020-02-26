@@ -109,7 +109,11 @@ export default function IpInfo({ ip, term, loc, ...extra }: IProps) {
             if (item.banner !== null) {
               return (
                 <Paper className={classes.paper} key={index}>
-                  <Chip className={classes.chip} label={label} />
+                  <Chip
+                    label={label}
+                    className={classes.chip}
+                    color="secondary"
+                  />
                   <Typography className={classes.banner}>
                     {item.banner}
                   </Typography>
@@ -127,7 +131,12 @@ export default function IpInfo({ ip, term, loc, ...extra }: IProps) {
           </Typography>
           <Paper className={classes.paper}>
             {Array.from(openPorts).map((port, index) => (
-              <Chip label={port} key={index} className={classes.portChip} />
+              <Chip
+                label={port}
+                key={index}
+                className={classes.portChip}
+                color="secondary"
+              />
             ))}
           </Paper>
         </Grid>
