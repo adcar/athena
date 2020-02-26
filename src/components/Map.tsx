@@ -30,7 +30,6 @@ export default function Map({ latitude, longitude, ...extra }: IProps) {
   // The initial lat and long will be what the prop set it as.
   const classes = useStyles();
   const [viewport, setViewport] = useState({
-    width: "100%",
     height: 500,
     zoom: 8,
     latitude,
@@ -38,6 +37,7 @@ export default function Map({ latitude, longitude, ...extra }: IProps) {
   });
   return (
     <ReactMapGL
+      width={"100%"}
       {...extra}
       {...viewport}
       mapStyle="mapbox://styles/adcar/ck72mywpg15151ip9mhcq5rf0"

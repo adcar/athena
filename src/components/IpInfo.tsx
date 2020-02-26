@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
+import Grid from "@material-ui/core/Grid";
 import Map from "./Map";
 
 const useStyles = makeStyles(theme => ({
@@ -78,63 +79,75 @@ export default function IpInfo({ ip, term, loc, ...extra }: IProps) {
   });
   return (
     <div {...extra}>
-      <Typography
-        variant="h4"
-        component="h2"
-        color="primary"
-        className={classes.title}
-        gutterBottom
-      >
-        TCP Banners
-      </Typography>
-      {banners.map((item, index) => {
-        let label;
-        switch (item.port) {
-          case 22:
-            label = "SSH";
-            break;
-          case 23:
-            label = "Telnet";
-            break;
-          case 80:
-            label = "HTTP";
-            break;
-          default:
-            label = "";
-            break;
-        }
-        if (item.banner !== null) {
-          return (
-            <Paper className={classes.paper} key={index}>
-              <Chip className={classes.chip} label={label} />
-              <Typography className={classes.banner}>{item.banner}</Typography>
-            </Paper>
-          );
-        }
-      })}
-      <Typography
-        variant="h4"
-        component="h2"
-        color="primary"
-        className={classes.title}
-      >
-        Open Ports
-      </Typography>
-      <Paper className={classes.paper}>
-        {Array.from(openPorts).map((port, index) => (
-          <Chip label={port} key={index} className={classes.portChip} />
-        ))}
-      </Paper>
-      <Typography
-        variant="h4"
-        component="h2"
-        color="primary"
-        className={classes.title}
-        gutterBottom
-      >
-        Approximate Location
-      </Typography>
-      <Map latitude={latitude} longitude={longitude} className={classes.map} />
+      <Grid container spacing={4}>
+        <Grid item xs={12} lg={6}>
+          <Typography
+            variant="h4"
+            component="h2"
+            color="primary"
+            className={classes.title}
+            gutterBottom
+          >
+            TCP Banners
+          </Typography>
+          {banners.map((item, index) => {
+            let label;
+            switch (item.port) {
+              case 22:
+                label = "SSH";
+                break;
+              case 23:
+                label = "Telnet";
+                break;
+              case 80:
+                label = "HTTP";
+                break;
+              default:
+                label = "";
+                break;
+            }
+            if (item.banner !== null) {
+              return (
+                <Paper className={classes.paper} key={index}>
+                  <Chip className={classes.chip} label={label} />
+                  <Typography className={classes.banner}>
+                    {item.banner}
+                  </Typography>
+                </Paper>
+              );
+            }
+          })}
+          <Typography
+            variant="h4"
+            component="h2"
+            color="primary"
+            className={classes.title}
+          >
+            Open Ports
+          </Typography>
+          <Paper className={classes.paper}>
+            {Array.from(openPorts).map((port, index) => (
+              <Chip label={port} key={index} className={classes.portChip} />
+            ))}
+          </Paper>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <Typography
+            variant="h4"
+            component="h2"
+            color="primary"
+            className={classes.title}
+            gutterBottom
+          >
+            Approximate Location
+          </Typography>
+          <Map
+            latitude={latitude}
+            longitude={longitude}
+            className={classes.map}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 }
