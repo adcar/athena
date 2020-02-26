@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "IPINFO_KEY": "@ipinfo-key"
+    }
+  }
+}
