@@ -1,13 +1,13 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Highlighter from "react-highlight-words";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import Grid from "@material-ui/core/Grid";
 import Map from "./Map";
+import Loader from "react-spinners/BounceLoader";
 
 const useStyles = makeStyles(theme => ({
   banner: {
@@ -37,6 +37,15 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.shadows[1]
+  },
+  loadingWrapper: {
+    width: "100%",
+    minHeight: "50vh",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }));
 
@@ -51,6 +60,7 @@ export default function IpInfo({ ip, term, loc, ...extra }: IProps) {
   const location = loc.split(",");
   const latitude = parseFloat(location[0]);
   const longitude = parseFloat(location[1]);
+  const theme = useTheme();
 
   const classes = useStyles();
   const GET_IP_INFO = gql`
@@ -63,7 +73,11 @@ export default function IpInfo({ ip, term, loc, ...extra }: IProps) {
   `;
   const { loading, error, data } = useQuery(GET_IP_INFO);
   if (loading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className={classes.loadingWrapper}>
+        <Loader color={theme.palette.secondary.main} />
+      </div>
+    );
   }
   if (error) {
     return <h1>Failed to retrieve data for this IPs</h1>;
