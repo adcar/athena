@@ -8,6 +8,7 @@ import { Breadcrumbs } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "../../src/components/Link";
 import BackIcon from "@material-ui/icons/ArrowBackSharp";
+import IpInfo from "../../src/components/IpInfo";
 
 const useStyles = makeStyles(theme => ({
   nav: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     color: theme.palette.secondary.main
+  },
+  info: {
+    marginTop: theme.spacing(2)
   }
 }));
 
@@ -69,15 +73,21 @@ export default function Host({ info }: IProps) {
       <Typography variant="subtitle1">
         {info.city}, {info.region}, {getName(info.country)}
       </Typography>
+      <IpInfo ip={ip} term={q} loc={info.loc} className={classes.info} />
     </Container>
   );
 }
 
 Host.getInitialProps = async context => {
   const { ip } = context.query;
-  const res = await fetch(
-    `https://ipinfo.io/${ip}/json?token=${process.env.IPINFO_KEY}`
-  );
-  const info = await res.json();
-  return { info };
+  try {
+    const res = await fetch(
+      `https://ipinfo.io/${ip}/json?token=${process.env.IPINFO_KEY}`
+    );
+    const info = await res.json();
+    return { info };
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
 };

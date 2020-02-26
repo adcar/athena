@@ -14,6 +14,10 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800&display=swap"
           />
+          <link
+            href="https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />
