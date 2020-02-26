@@ -4,7 +4,7 @@ import { getName } from "country-list";
 import { useRouter } from "next/router";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { Breadcrumbs } from "@material-ui/core";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "../../src/components/Link";
 import BackIcon from "@material-ui/icons/ArrowBackSharp";
