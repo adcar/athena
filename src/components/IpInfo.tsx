@@ -11,7 +11,8 @@ import Map from "./Map";
 
 const useStyles = makeStyles(theme => ({
   banner: {
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
+    overflowX: "auto"
   },
   paper: {
     padding: theme.spacing(2),
