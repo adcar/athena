@@ -45,7 +45,7 @@ interface IProps {
   info: IInfo;
 }
 
-export default function Host({ info }: IProps) {
+function Host({ info }: IProps) {
   const router = useRouter();
   const { ip, q } = router.query;
   const classes = useStyles();
@@ -91,3 +91,5 @@ Host.getInitialProps = async context => {
     return {};
   }
 };
+
+export default Host;
