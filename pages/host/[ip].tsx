@@ -81,8 +81,9 @@ function Host({ info }: IProps) {
 Host.getInitialProps = async context => {
   const { ip } = context.query;
   try {
+    // I use CORS Anywhere to proxy the request to ipinfo.io so it will work on browsers with adblock installed
     const res = await fetch(
-      `https://ipinfo.io/${ip}/json?token=${process.env.IPINFO_KEY}`
+      `https://cors-anywhere.herokuapp.com/https://ipinfo.io/${ip}/json?token=${process.env.IPINFO_KEY}`
     );
     const info = await res.json();
     return { info };
