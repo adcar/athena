@@ -63,8 +63,6 @@ export default function Search(props: IProps) {
   const { q } = router.query;
   function handleSubmit(e) {
     e.preventDefault();
-    // setOpen(true);
-    // textRef.current.blur();
     if (term !== "") router.push(`/results?q=${term}`);
   }
   return (
